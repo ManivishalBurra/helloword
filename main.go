@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -29,5 +30,8 @@ func main() {
 	app.HandleFunc("/drivercancelride", C.DriverCancelRide)
 	app.HandleFunc("/user/logout", C.UserLogout)
 	app.HandleFunc("/driver/logout", C.DriverLogout)
-	log.Fatal(http.ListenAndServe(port, app))
+	log.Fatal(http.ListenAndServe(":"+port, app))
+	app.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		fmt.Fprintf(w, port)
+	})
 }
