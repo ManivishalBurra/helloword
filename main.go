@@ -15,7 +15,7 @@ func main() {
 
 	app := mux.NewRouter()
 	app.HandleFunc("/", index_handle)
-	app.HandleFunc("https://eltrocaps.herokuapp.com/driver", C.CreateDriver).Methods("POST")
+	app.HandleFunc("https://eltrocaps.herokuapp.com/driver", CreateDriver).Methods("POST")
 	app.HandleFunc("https://eltrocaps.herokuapp.com/login/driver", C.LoginDriver).Methods("POST")
 	app.HandleFunc("https://eltrocaps.herokuapp.com/cabrequests", C.FetchRequest).Methods("POST")
 	app.HandleFunc("https://eltrocaps.herokuapp.com/user", C.CreateUser).Methods("POST")
@@ -31,4 +31,7 @@ func main() {
 }
 func index_handle(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "whoah, nice nice")
+}
+func CreateDriver(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "whoah, nice ludo")
 }
