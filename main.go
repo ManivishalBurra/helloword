@@ -13,6 +13,7 @@ func main() {
 	port := os.Getenv("PORT")
 	if port == "" {
 		log.Fatal("port must be set")
+		port = "8080"
 	}
 	app := mux.NewRouter()
 	app.HandleFunc("/driver", C.CreateDriver)
