@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -11,27 +10,24 @@ import (
 )
 
 func main() {
-	port := os.Getenv("PORT")
-
 	app := mux.NewRouter()
-	app.HandleFunc("/", index_handle)
-	app.HandleFunc("https://eltrocaps.herokuapp.com/driver", CreateDrivers).Methods("POST")
-	app.HandleFunc("https://eltrocaps.herokuapp.com/login/driver", C.LoginDriver).Methods("POST")
-	app.HandleFunc("https://eltrocaps.herokuapp.com/cabrequests", C.FetchRequest).Methods("POST")
-	app.HandleFunc("https://eltrocaps.herokuapp.com/user", C.CreateUser).Methods("POST")
-	app.HandleFunc("https://eltrocaps.herokuapp.com/login/user", C.LoginUser).Methods("POST")
-	app.HandleFunc("https://eltrocaps.herokuapp.com/bookride", C.BookRide).Methods("POST")
-	app.HandleFunc("https://eltrocaps.herokuapp.com/driverconfirm", C.DriverConfirm).Methods("POST")
-	app.HandleFunc("https://eltrocaps.herokuapp.com/ridestatus", C.RideStatus).Methods("POST")
-	app.HandleFunc("https://eltrocaps.herokuapp.com/usercancelride", C.UserCancelRide).Methods("POST")
-	app.HandleFunc("https://eltrocaps.herokuapp.com/drivercancelride", C.DriverCancelRide).Methods("POST")
-	app.HandleFunc("https://eltrocaps.herokuapp.com/user/logout", C.UserLogout).Methods("POST")
-	app.HandleFunc("https://eltrocaps.herokuapp.com/driver/logout", C.DriverLogout).Methods("POST")
-	log.Fatal(http.ListenAndServe(":"+port, app))
-}
-func index_handle(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "whoah, nice nice")
-}
-func CreateDrivers(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "whoah, nice ludo")
+	port := os.Getenv("PORT")
+	if port == "" {
+		log.Fatal("port must be set")
+		port = "8080"
+		log.Fatal(http.ListenAndServe(":"+port, app))
+	}
+	app.HandleFunc("/driver", C.CreateDriver)
+	app.HandleFunc("/login/driver", C.LoginDriver)
+	app.HandleFunc("/cabrequests", C.FetchRequest)
+	app.HandleFunc("/user", C.CreateUser)
+	app.HandleFunc("/login/user", C.LoginUser)
+	app.HandleFunc("/bookride", C.BookRide)
+	app.HandleFunc("/driverconfirm", C.DriverConfirm)
+	app.HandleFunc("/ridestatus", C.RideStatus)
+	app.HandleFunc("/usercancelride", C.UserCancelRide)
+	app.HandleFunc("/drivercancelride", C.DriverCancelRide)
+	app.HandleFunc("/user/logout", C.UserLogout)
+	app.HandleFunc("/driver/logout", C.DriverLogout)
+	log.Fatal(http.ListenAndServe(port, app))
 }
