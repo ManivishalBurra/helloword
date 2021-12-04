@@ -50,6 +50,7 @@ type Claims struct {
 }
 
 func CreateDriver(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "whoah, nice nice")
 	driverDetails := models.Driver{}
 	client, err := U.Session()
 	if err != nil {
@@ -76,6 +77,7 @@ func CreateDriver(w http.ResponseWriter, r *http.Request) {
 }
 
 func LoginDriver(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "whoah, nice nice")
 	var credentials Credentials
 	json.NewDecoder(r.Body).Decode(&credentials)
 	client, err := U.Session()
@@ -139,6 +141,7 @@ func LoginDriver(w http.ResponseWriter, r *http.Request) {
 }
 
 func FetchRequest(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "whoah, nice nice")
 	auth := r.Header.Get("Authorization")
 	if auth == "" {
 		w.WriteHeader(http.StatusUnauthorized)
@@ -211,6 +214,7 @@ func FetchRequest(w http.ResponseWriter, r *http.Request) {
 }
 
 func DriverConfirm(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "whoah, nice nice")
 	auth := r.Header.Get("Authorization")
 	if auth == "" {
 		w.WriteHeader(http.StatusUnauthorized)
