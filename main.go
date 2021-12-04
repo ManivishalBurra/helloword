@@ -11,22 +11,19 @@ import (
 
 func main() {
 	port := os.Getenv("PORT")
-	if port == "" {
-		log.Fatal("port must be set")
-		port = "8080"
-	}
+
 	app := mux.NewRouter()
-	app.HandleFunc(port+"/driver", C.CreateDriver)
-	app.HandleFunc(port+"/login/driver", C.LoginDriver)
-	app.HandleFunc(port+"/cabrequests", C.FetchRequest)
-	app.HandleFunc(port+"/user", C.CreateUser)
-	app.HandleFunc(port+"/login/user", C.LoginUser)
-	app.HandleFunc(port+"/bookride", C.BookRide)
-	app.HandleFunc(port+"/driverconfirm", C.DriverConfirm)
-	app.HandleFunc(port+"/ridestatus", C.RideStatus)
-	app.HandleFunc(port+"/usercancelride", C.UserCancelRide)
-	app.HandleFunc(port+"/drivercancelride", C.DriverCancelRide)
-	app.HandleFunc(port+"/user/logout", C.UserLogout)
-	app.HandleFunc(port+"/driver/logout", C.DriverLogout)
+	app.HandleFunc("https://eltrocaps.herokuapp.com/driver", C.CreateDriver)
+	app.HandleFunc("https://eltrocaps.herokuapp.com/login/driver", C.LoginDriver)
+	app.HandleFunc("https://eltrocaps.herokuapp.com/cabrequests", C.FetchRequest)
+	app.HandleFunc("https://eltrocaps.herokuapp.com/user", C.CreateUser)
+	app.HandleFunc("https://eltrocaps.herokuapp.com/login/user", C.LoginUser)
+	app.HandleFunc("https://eltrocaps.herokuapp.com/bookride", C.BookRide)
+	app.HandleFunc("https://eltrocaps.herokuapp.com/driverconfirm", C.DriverConfirm)
+	app.HandleFunc("https://eltrocaps.herokuapp.com/ridestatus", C.RideStatus)
+	app.HandleFunc("https://eltrocaps.herokuapp.com/usercancelride", C.UserCancelRide)
+	app.HandleFunc("https://eltrocaps.herokuapp.com/drivercancelride", C.DriverCancelRide)
+	app.HandleFunc("https://eltrocaps.herokuapp.com/user/logout", C.UserLogout)
+	app.HandleFunc("https://eltrocaps.herokuapp.com/driver/logout", C.DriverLogout)
 	log.Fatal(http.ListenAndServe(":"+port, app))
 }
