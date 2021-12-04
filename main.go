@@ -32,6 +32,6 @@ func main() {
 	app.HandleFunc("/driver/logout", C.DriverLogout)
 	log.Fatal(http.ListenAndServe(":"+port, app))
 	app.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf(w, port)
+		fmt.Fprintf(w, "fdjkjfgf")
 	})
 }
